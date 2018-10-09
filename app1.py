@@ -10,6 +10,12 @@ def translate(word):
     word = word.lower()
     if word in data:
         return data[word]
+    # Check if the word is a proper noun with a capital letter (e.g. Oslo)
+    elif word.title() in data:
+        return data[word.title()]
+    # Check if the word is an acronym with only capital letters (e.g. NATO)
+    elif word.upper() in data:
+        return data[word.upper()]
     # Check if there are close matches and return the closest word
     elif len(get_close_matches(word, data.keys())) > 0:
         choice = input("Did you mean %s instead? Enter Y if yes, or N if no: " %
